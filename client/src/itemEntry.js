@@ -22,6 +22,7 @@ function createListItem(text) {
   // add unique ID
   var id = "item-" + Date.now();
   newItemWrapper.id = id;
+  newItemWrapper.classList.add("item");
   
   return newItemWrapper;
 }
@@ -32,6 +33,9 @@ export function addItem(e) {
 
   // create and append new item with itemText
   var itemText = getNewItemText();
+  if (itemText.length == 0) {
+    return;
+  }
   var newItem = createListItem(itemText);
   
   var itemContainer = document.getElementById("itemContainer");

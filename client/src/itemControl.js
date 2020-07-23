@@ -9,6 +9,7 @@ function deleteItem(e) {
 export function deleteButton() {
   // create and add button
   var newItemButton = document.createElement("button");
+  newItemButton.classList.add("delete");
   newItemButton.innerText = "Delete";
   newItemButton.addEventListener("click", deleteItem);
   return newItemButton;
@@ -54,6 +55,7 @@ function editItem(e) {
 export function editButton() {
   // create and add button
   var newItemButton = document.createElement("button");
+  newItemButton.classList.add("edit");
   newItemButton.innerText = "Edit";
   newItemButton.addEventListener("click", editItem);
   return newItemButton;
