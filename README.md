@@ -2,5 +2,5 @@
 
 ## Issues
 
-* Form submits twice
-* process.env stopped working
+* Select multiple and move to top
+* Move up one or down
