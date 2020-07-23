@@ -8,9 +8,7 @@ module.exports = {
   mode: 'development',
   entry: './src/index.js',
   devtool: 'inline-source-map',
-  devServer: {
-    contentBase: './dist',
-  },
+  watch: false,
   plugins: [
     new Dotenv(),
     new CleanWebpackPlugin(),
