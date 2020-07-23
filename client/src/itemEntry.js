@@ -10,16 +10,23 @@ function getNewItemText() {
 
 // create new list item
 function createListItem(text) {
-  var newItem = document.createElement("li");
-  newItem.innerText = text
+  var newItemText = document.createElement("span");
+  newItemText.innerText = text
+  var newItemWrapper = document.createElement("li");
+  newItemWrapper.appendChild(newItemText);
 
+  // create and add button
+  var newItemButton = document.createElement("button");
+  newItemButton.innerText = "Delete";
+  
   // add unique ID
   var id = text.replace(/[\W]/g, "_") + Date.now();
-  newItem.id = id;
-
+  newItemWrapper.id = id;
+  
   // add event listeners
-  newItem.addEventListener("click", deleteItem);
-  return newItem;
+  newItemButton.addEventListener("click", deleteItem);
+  newItemWrapper.appendChild(newItemButton);
+  return newItemWrapper;
 }
 
 // add item to the list
