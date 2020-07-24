@@ -1,4 +1,4 @@
-import { deleteButton, editButton } from './itemControl.js';
+import { deleteButton, editButton, submitEdit } from './itemControl.js';
 
 // get item text from entry form and clear the form
 function getNewItemText() {
@@ -13,9 +13,17 @@ function createListItem(text) {
   var newItemText = document.createElement("span");
   newItemText.innerText = text
 
+  // create edit input
+  var editInput = document.createElement("input");
+  editInput.setAttribute("placeholder", text);
+  editInput.style.display = "none";
+  editInput.addEventListener("blur", submitEdit);
+  editInput.addEventListener("keyup", submitEdit);
+
   /// create wrapper element and add buttons
   var newItemWrapper = document.createElement("li");
   newItemWrapper.appendChild(newItemText);
+  newItemWrapper.appendChild(editInput);
   newItemWrapper.appendChild(editButton());
   newItemWrapper.appendChild(deleteButton());
   

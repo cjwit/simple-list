@@ -40,12 +40,6 @@ ul {
   overflow: hidden;
 }
 
-.item button {
-  margin-left: 0.5em;
-  font-size: 1em;
-  padding: 0.5em;
-}
-
 .item span {
   margin-right: 2em;
 }
@@ -61,6 +55,14 @@ input[type=text] {
   border-radius: 5px;
 }
 
+.item input[type=text] {
+  border: none;
+  border-bottom: 0.2em solid $body-color;
+  height: 1em;
+  font-size: 1em;
+  border-radius: 5px;
+}
+
 button {
   border: none;
   color: $body-color;
@@ -70,3 +72,10 @@ button {
   border-radius: 5px;
   margin: 0.5em;
 }
+
+.item button {
+  margin-left: 0.5em;
+  font-size: 1em;
+  padding: 0.5em;
+}
+
