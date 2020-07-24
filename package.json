@@ -11,6 +11,7 @@
   "scripts": {
     "client": "cd client && npm run dev",
     "server": "",
-    "dev": "npm-run-all --parallel server client"
+    "dev": "npm-run-all --parallel server client",
+    "build": "cd client && npm run build && cd .. && git commit -am 'run build' && git subtree push --prefix client/dist origin gh-pages"
   }
 }
