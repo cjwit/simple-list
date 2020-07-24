@@ -3,4 +3,4 @@
 ## Issues
 
 * Select multiple and move to top
-* Move up one or down
+* Figure out how to build production version
