@@ -39,13 +39,15 @@ export function submitEdit(e) {
 
 // edit text when clicked (replace span with input field)
 function editItem(e) {
+  
   // hide text span and show edit form
   var elementWrapper = document.getElementById(e.target.parentNode.id);
   var childNodes = elementWrapper.childNodes;
+  
   var textSpan = childNodes[0];
-  var input = childNodes[1];
-  console.log(input);
   textSpan.style.display = "none";
+
+  var input = childNodes[1];
   input.setAttribute("placeholder", textSpan.innerText);
   input.style.display = "inline";
 }

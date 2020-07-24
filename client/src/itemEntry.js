@@ -16,6 +16,7 @@ function createListItem(text) {
   // create edit input
   var editInput = document.createElement("input");
   editInput.setAttribute("placeholder", text);
+  editInput.setAttribute("type", "text");
   editInput.style.display = "none";
   editInput.addEventListener("blur", submitEdit);
   editInput.addEventListener("keyup", submitEdit);
