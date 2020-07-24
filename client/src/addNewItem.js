@@ -1,15 +1,8 @@
 import { deleteButton, editButton, submitEdit } from './itemControl.js';
-
-// get item text from entry form and clear the form
-function getNewItemText() {
-  var itemEntryTextForm = document.getElementById("itemEntryText");
-  var text = itemEntryTextForm.value;
-  itemEntryTextForm.value = "";
-  return text;
-}
+import { updateStorage } from './storage.js';
 
 // create new list item
-function createListItem(text) {
+export function createListItem(text) {
   var newItemText = document.createElement("span");
   newItemText.innerText = text
 
@@ -27,26 +20,31 @@ function createListItem(text) {
   newItemWrapper.appendChild(editInput);
   newItemWrapper.appendChild(editButton());
   newItemWrapper.appendChild(deleteButton());
-  
+
   // add unique ID
   var id = "item-" + Date.now();
   newItemWrapper.id = id;
   newItemWrapper.classList.add("item");
-  
+
   return newItemWrapper;
 }
 
 // add item to the list
 export function addItem(e) {
-  e.preventDefault();
+  if (e.keyCode == 13 || e.keyCode == 10) {
 
-  // create and append new item with itemText
-  var itemText = getNewItemText();
-  if (itemText.length == 0) {
-    return;
+    // create and append new item with itemText
+    var itemText = e.target.value;
+    e.target.value = "";
+    if (itemText.length == 0) {
+      return;
+    }
+
+    var newItem = createListItem(itemText);
+
+    var itemContainer = document.getElementById("itemContainer");
+    itemContainer.appendChild(newItem);
+
+    updateStorage();
   }
-  var newItem = createListItem(itemText);
-  
-  var itemContainer = document.getElementById("itemContainer");
-  itemContainer.appendChild(newItem);
 }

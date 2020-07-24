@@ -1,8 +1,11 @@
+import { updateStorage } from './storage.js';
+
 // delete element when clicked
 function deleteItem(e) {
   // get wrapper (parent node of the button that triggered the event)
   var elementWrapper = document.getElementById(e.target.parentNode.id);
-  return elementWrapper.parentNode.removeChild(elementWrapper);
+  elementWrapper.parentNode.removeChild(elementWrapper);
+  updateStorage();
 }
 
 // build delete button
@@ -21,29 +24,36 @@ export function submitEdit(e) {
   // check for event type and return if not submitting
   if (e.keyCode == 13 || e.keyCode == 10 || e.type == "blur") {
 
-    // get new text
-    var newText = e.target.value;
-
     // replace input with new text
     var elementWrapper = e.target.parentNode;
     var childNodes = elementWrapper.childNodes;
 
     var textSpan = childNodes[0];
-    textSpan.innerText = newText;
+
+    // get new text
+    var newText = e.target.value;
+
+    // replace text if there is an entry
+    if (newText.length != 0) {
+      textSpan.innerText = newText;
+    }
+
     textSpan.style.display = "inline";
 
     var input = childNodes[1];
     input.style.display = "none";
+
+    updateStorage();
   }
 }
 
 // edit text when clicked (replace span with input field)
 function editItem(e) {
-  
+
   // hide text span and show edit form
   var elementWrapper = document.getElementById(e.target.parentNode.id);
   var childNodes = elementWrapper.childNodes;
-  
+
   var textSpan = childNodes[0];
   textSpan.style.display = "none";
 
