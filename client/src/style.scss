@@ -40,12 +40,17 @@ ul {
   list-style-type: none;
   padding-left: 1em;
   border-radius: 5px;
-  margin-top: 0.2em;
+  margin-bottom: 0.2em;
   overflow: hidden;
 }
 
 .item span {
   margin-right: 2em;
+}
+
+.selected {
+  border: 1px solid $highlight-color;
+  margin-bottom: calc(0.2em - 2px);
 }
 
 // input fields
