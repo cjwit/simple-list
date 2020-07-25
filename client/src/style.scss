@@ -12,7 +12,7 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-#header {
+header, footer {
   background: $background-color;
   border-top: 1px $highlight-color solid;
   padding: 1em;
@@ -84,5 +84,10 @@ button {
   margin-left: 0.5em;
   font-size: 1em;
   padding: 0.5em;
+  width: 3em;
 }
 
+.item button svg {
+  height: 1em;
+  width: 1em;
+}

@@ -20,5 +20,4 @@ Sortable.create(items, {
   onSort: updateStorage
 });
 
-
 loadItems();

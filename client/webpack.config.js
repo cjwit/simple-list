@@ -30,6 +30,10 @@ module.exports = {
           'css-loader',
           'sass-loader',
         ]
+      },
+      {
+        test: /.svg$/i,
+        use: 'raw-loader'
       }
     ]
   }

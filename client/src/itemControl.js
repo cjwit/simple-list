@@ -1,4 +1,6 @@
 import { updateStorage } from './storage.js';
+import deleteIcon from './delete.svg';
+import editIcon from './pen.svg';
 
 // delete element when clicked
 function deleteItem(e) {
@@ -13,7 +15,7 @@ export function deleteButton() {
   // create and add button
   var newItemButton = document.createElement("button");
   newItemButton.classList.add("delete");
-  newItemButton.innerText = "Delete";
+  newItemButton.innerHTML = deleteIcon;
   newItemButton.addEventListener("click", deleteItem);
   return newItemButton;
 }
@@ -37,7 +39,6 @@ export function submitEdit(e) {
     if (newText.length != 0) {
       textSpan.innerText = newText;
     }
-
     textSpan.style.display = "inline";
 
     var input = childNodes[1];
@@ -67,7 +68,7 @@ export function editButton() {
   // create and add button
   var newItemButton = document.createElement("button");
   newItemButton.classList.add("edit");
-  newItemButton.innerText = "Edit";
+  newItemButton.innerHTML = editIcon;
   newItemButton.addEventListener("click", editItem);
   return newItemButton;
 }
