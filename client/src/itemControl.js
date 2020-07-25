@@ -5,8 +5,8 @@ import editIcon from './pen.svg';
 // delete element when clicked
 function deleteItem(e) {
   // get wrapper (parent node of the button that triggered the event)
-  var elementWrapper = document.getElementById(e.target.parentNode.id);
-  elementWrapper.parentNode.removeChild(elementWrapper);
+  var elementWrapper = document.getElementById(e.currentTarget.parentNode.id);
+  document.getElementById("itemContainer").removeChild(elementWrapper);
   updateStorage();
 }
 
@@ -15,8 +15,8 @@ export function deleteButton() {
   // create and add button
   var newItemButton = document.createElement("button");
   newItemButton.classList.add("delete");
-  newItemButton.innerHTML = deleteIcon;
   newItemButton.addEventListener("click", deleteItem);
+  newItemButton.innerHTML = deleteIcon;
   return newItemButton;
 }
 
@@ -52,7 +52,7 @@ export function submitEdit(e) {
 function editItem(e) {
 
   // hide text span and show edit form
-  var elementWrapper = document.getElementById(e.target.parentNode.id);
+  var elementWrapper = document.getElementById(e.currentTarget.parentNode.id);
   var childNodes = elementWrapper.childNodes;
 
   var textSpan = childNodes[0];
