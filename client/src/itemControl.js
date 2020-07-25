@@ -1,6 +1,7 @@
 import { updateStorage } from './storage.js';
 import deleteIcon from './delete.svg';
 import editIcon from './pen.svg';
+import Sortable from 'sortablejs';
 
 // delete element when clicked
 function deleteItem(e) {
@@ -50,9 +51,10 @@ export function submitEdit(e) {
 
 // edit text when clicked (replace span with input field)
 function editItem(e) {
-
+  
   // hide text span and show edit form
   var elementWrapper = document.getElementById(e.currentTarget.parentNode.id);
+  Sortable.utils.deselect(elementWrapper);
   var childNodes = elementWrapper.childNodes;
 
   var textSpan = childNodes[0];
@@ -61,6 +63,7 @@ function editItem(e) {
   var input = childNodes[1];
   input.setAttribute("placeholder", textSpan.innerText);
   input.style.display = "inline";
+  input.focus();
 }
 
 // build delete button

@@ -2,6 +2,6 @@
 
 ## Issues
 
-* Select multiple and move to top
 * Figure out how to build production version
+* Start at "Npm Script(Server)" section, figure out `nodemon` dev server and `dotenv`
 * Solve dist issue with gh-pages as subtree
