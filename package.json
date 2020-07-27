@@ -4,14 +4,12 @@
   "description": "a simple shopping list",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Christopher Witulski",
-  "license": "ISC",
-  "scripts": {
     "client": "cd client && npm run dev",
     "server": "",
     "dev": "npm-run-all --parallel server client",
     "build": "cd client && npm run build && cd .. && git add . && git commit -am 'run build' && git subtree push --prefix client/dist origin gh-pages"
-  }
+  },
+  "author": "Christopher Witulski",
+  "license": "ISC",
+  "dependencies": {}
 }
