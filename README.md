@@ -3,5 +3,7 @@
 ## Issues
 
 * Figure out how to build production version
-* Start at "Npm Script(Server)" section, figure out `nodemon` dev server and `dotenv`
-* Solve dist issue with gh-pages as subtree
+* Start at "Handle input validation errors" section
+* Database queries are not hooked up yet
+* Create APIs for client side
+* Solve dist issue with gh-pages as subtreex
