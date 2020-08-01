@@ -2,7 +2,7 @@ import { deleteButton, editButton, submitEdit } from './itemControl.js';
 import { updateStorage } from './storage.js';
 
 // create new list item
-export function createListItem(text) {
+export function createListItem(text, id = null) {
   var newItemText = document.createElement("span");
   newItemText.innerText = text
 
@@ -20,11 +20,13 @@ export function createListItem(text) {
   newItemWrapper.appendChild(editInput);
   newItemWrapper.appendChild(editButton());
   newItemWrapper.appendChild(deleteButton());
+  newItemWrapper.classList.add("item");
 
   // add unique ID
-  var id = "item-" + Date.now();
-  newItemWrapper.id = id;
-  newItemWrapper.classList.add("item");
+  id == null ? 
+  newItemWrapper.id = "item-" + Date.now()
+  : 
+  newItemWrapper.id = id
 
   return newItemWrapper;
 }

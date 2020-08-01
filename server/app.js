@@ -21,17 +21,14 @@ app.use(bodyParser.json());
 var items = [];
 
 app.get('/', (req, res) => {
-  console.log(' -> serving main file');
   res.sendFile('index.html');
 });
 
 app.get('/storage', (req, res) => {
-  console.log(' -> reading,', items.length, 'sent')
   res.send({ items: items });
 });
 
 app.post('/storage', (req, res) => {
-  console.log(' -> saving', items.length, 'items' )
   items = req.body;
 })
 

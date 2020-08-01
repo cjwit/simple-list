@@ -2,7 +2,7 @@ import { createListItem } from './addNewItem.js';
 
 // initialize item
 function initializeItem(item) { 
-  var newItem = createListItem(item.text);
+  var newItem = createListItem(item.text, item.id);
   var itemContainer = document.getElementById("itemContainer");
   itemContainer.appendChild(newItem);
 }
