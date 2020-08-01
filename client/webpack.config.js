@@ -15,7 +15,7 @@ module.exports = {
   },
   plugins: [
     new Dotenv(),
-    new CleanWebpackPlugin(),
+    // new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       title: 'Simple Shopping List',
       template: "src/index.html",

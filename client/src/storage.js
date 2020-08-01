@@ -8,10 +8,21 @@ function initializeItem(item) {
 }
 
 export function loadItems() {
-  var itemList = JSON.parse(localStorage.getItem('itemList'));
-  for (var i = 0; i < itemList.length; i++) {
-    initializeItem(itemList[i]);
-  }
+  // get data from
+  fetch('http://localhost:3000/storage', {
+    method: 'get'
+  })
+  .then(response => response.json())
+  .then(jsonData => 
+    {
+      var itemList = jsonData.items;
+      for (var i = 0; i < itemList.length; i++) {
+        initializeItem(itemList[i]);
+      }    
+    })
+  .catch(err => {
+    console.log("error:", err)
+  })
 }
 
 export function updateStorage() {
@@ -25,5 +36,21 @@ export function updateStorage() {
     }
     storage.push(item);
   }
-  localStorage.setItem("itemList", JSON.stringify(storage));
+
+  fetch('http://localhost:3000/storage', {
+    method: 'post',
+    body: JSON.stringify(storage),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log('success:', data)
+  })
+  .catch((err) => {
+    console.error('error:', err);
+  });
+
+  // localStorage.setItem("itemList", JSON.stringify(storage));
 }

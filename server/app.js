@@ -2,7 +2,12 @@ const express = require('express');
 const createError = require('http-errors');
 
 const app = express();
-app.use(express.static('../client/dist'))
+app.use(express.static('../client/dist'));
+
+// for sending data
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 // production setup
 // const isProduction = app.get("env") === "production";
@@ -13,8 +18,22 @@ app.use(express.static('../client/dist'))
 
 // app.disable("x-powered-by");
 
+var items = [];
 
-// app.get('/', (req, res) => res.send("Hello World!"));
+app.get('/', (req, res) => {
+  console.log(' -> serving main file');
+  res.sendFile('index.html');
+});
+
+app.get('/storage', (req, res) => {
+  console.log(' -> reading,', items.length, 'sent')
+  res.send({ items: items });
+});
+
+app.post('/storage', (req, res) => {
+  console.log(' -> saving', items.length, 'items' )
+  items = req.body;
+})
 
 // error handler
 app.use(function (err, req, res, next) {
