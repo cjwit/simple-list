@@ -8,7 +8,11 @@ module.exports = {
   mode: 'development',
   entry: './src/index.js',
   devtool: 'inline-source-map',
-  watch: false,
+  watch: true,
+  watchOptions: {
+    aggregateTimeout: 200,
+    ignored: /node_modules/
+  },
   plugins: [
     new Dotenv(),
     new CleanWebpackPlugin(),

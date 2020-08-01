@@ -4,7 +4,7 @@
   "description": "a simple shopping list",
   "main": "index.js",
   "scripts": {
-    "client": "cd client && npm run dev",
+    "client": "cd client && npm run watch",
     "server": "cd server && npm run dev",
     "dev": "npm-run-all --parallel server client",
     "build": "cd client && npm run build && cd .. && git add . && git commit -am 'run build' && git subtree push --prefix client/dist origin gh-pages"
