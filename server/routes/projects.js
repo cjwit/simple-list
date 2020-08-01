@@ -7,7 +7,7 @@ const router = express.Router();
 module.exports = router;
 
 router.post(
-  '/create'
+  '/create',
   express.json(),
   asyncHandler(async(req, res, next) => {
 
@@ -24,5 +24,20 @@ router.post(
 
       res.json({ id: rows[0].masked_task_id });
     }, next);
+  })
+)
+
+// TODO demonstrate error handling
+router.post(
+  '/login',
+  upload.none(),
+  [body("email", "Invalid email format").isEmail()],
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return next(createError(422, errors.mapped()));
+    }
+
+    res.json({});
   })
 )
