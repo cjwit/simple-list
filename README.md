@@ -10,3 +10,4 @@
 
 * Figure out how to build production version
 * Start at "Handle input validation errors" section
+* Organize server files (router, queries, etc)
