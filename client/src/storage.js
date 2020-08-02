@@ -2,7 +2,7 @@ import { createListItem } from './addNewItem.js';
 
 // initialize item
 function initializeItem(item) { 
-  var newItem = createListItem(item.text, item.id);
+  var newItem = createListItem(item.item_name, item.id);
   var itemContainer = document.getElementById("itemContainer");
   itemContainer.appendChild(newItem);
 }
@@ -31,8 +31,8 @@ export function updateStorage() {
   for (var i = 1; i < itemList.length; i++) {
     let item = {
       id: itemList[i].id,
-      text: itemList[i].childNodes[0].innerText,
-      created: Date.now()
+      item_name: itemList[i].childNodes[0].innerText,
+      item_number: i - 1
     }
     storage.push(item);
   }

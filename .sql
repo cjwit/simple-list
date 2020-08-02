@@ -1,10 +1,11 @@
-DROP TABLE IF EXISTS items;
 
 CREATE TABLE items(
   id BIGSERIAL PRIMARY KEY,
   item_name TEXT,
   item_number INT
 );
+
+DROP TABLE IF EXISTS items;
 
 INSERT INTO items (id, item_name, item_number)
 VALUES (001, 'oranges', 0);
