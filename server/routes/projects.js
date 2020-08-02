@@ -2,42 +2,52 @@ const express = require('express');
 const asyncHandler = require('express-async-handler');
 const db = require('../db');
 
-const router = express.Router();
+const app = express.Router();
 
 module.exports = router;
 
-router.post(
-  '/create',
-  express.json(),
-  asyncHandler(async(req, res, next) => {
+// sent page to client
+app.get('/', (req, res) => {
+  res.sendFile('index.html');
+});
 
-    // TODO, get two objects from req.body and set them to variables
-    const { title, project_id } = req.body;
+// queries
+const queryPostTemplate = `
+DROP TABLE IF EXISTS items;
 
-    db.tx(async (client) => {
-      const {
-        rows,
-      } = await client.query(
-        'INSERT INTO tasks (title) VALUES ($1) RETURNING mask_id(task_id) as masked_task_id, task_id',
-        [title]
-      );
+CREATE TABLE items(
+  id varchar(30) PRIMARY KEY,
+  item_name varchar(50),
+  item_number integer
+);
 
-      res.json({ id: rows[0].masked_task_id });
-    }, next);
+INSERT INTO items (id, item_name, item_number) VALUES 
+`
+
+// send data to the client
+app.get('/storage', (req, res) => {
+  pool.query('SELECT * FROM items;', (err, results) => {
+    console.log(" => getting items", results.rows)
+    res.send({ items: results.rows })
   })
-)
+});
 
-// TODO demonstrate error handling
-router.post(
-  '/login',
-  upload.none(),
-  [body("email", "Invalid email format").isEmail()],
-  asyncHandler(async (req, res, next) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return next(createError(422, errors.mapped()));
-    }
+// save data on update from the client
+app.post('/storage', (req, res) => {
+  
+  // create query from req.body
+  var queryText = queryPostTemplate;
+  itemList = req.body;
+  for (var i = 0; i < itemList.length; i++) {
+    let item = itemList[i];
+    let itemString = `\n  ('${item.id}', '${item.item_name}', ${item.item_number}),`
+    queryText += itemString;
+  }
+  queryText = queryText.replace(/,$/,";");
 
-    res.json({});
+  // send query to database
+  pool.query(queryText, (err, res) => {
+    console.log(res);
+    // res.status(201).send(' --> cleared table');
   })
-)
+})

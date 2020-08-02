@@ -1,20 +1,20 @@
 
-CREATE TABLE items(
-  id BIGSERIAL PRIMARY KEY,
-  item_name TEXT,
-  item_number INT
-);
 
 DROP TABLE IF EXISTS items;
+
+CREATE TABLE items(
+  id varchar(30) PRIMARY KEY,
+  item_name varchar(50),
+  item_number integer
+);
+
+INSERT INTO items (id, item_name, item_number) VALUES 
+  ('item-1596392194764', 'thing', 0),
+  ('item-1596392202230', 'oranges', 1);
 
 INSERT INTO items (id, item_name, item_number)
 VALUES (001, 'oranges', 0);
 
-INSERT INTO items (id, item_name, item_number)
-VALUES 
-  (001, 'oranges', 0),
-  (002, 'crackers', 1),
-  (003, 'seltzer water', 2);
 
 UPDATE items
 SET item_name = 'raisins' 

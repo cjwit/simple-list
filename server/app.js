@@ -13,21 +13,24 @@ app.use(bodyParser.json());
 const db = require('./db');
 const { pool } = require('./db');
 
-// production setup
-// const isProduction = app.get("env") === "production";
-
-// if (isProduction) {
-//   app.set("trust proxy", 1);
-// }
-
-// app.disable("x-powered-by");
-
-var items = [];
-
+// sent page to client
 app.get('/', (req, res) => {
   res.sendFile('index.html');
 });
 
+// queries
+const queryPostTemplate = `
+DROP TABLE IF EXISTS items;
+
+CREATE TABLE items(
+  id varchar(30) PRIMARY KEY,
+  item_name varchar(50),
+  item_number integer
+);
+
+INSERT INTO items (id, item_name, item_number) VALUES`
+
+// send data to the client
 app.get('/storage', (req, res) => {
   pool.query('SELECT * FROM items;', (err, results) => {
     console.log(" => getting items", results.rows)
@@ -35,61 +38,23 @@ app.get('/storage', (req, res) => {
   })
 });
 
-const clearTableText = `
-DROP TABLE IF EXISTS items;
-
-CREATE TABLE items(
-  id BIGSERIAL PRIMARY KEY,
-  item_name TEXT,
-  item_number INT
-);
-`
-/* query text model
-INSERT INTO items (id, item_name, item_number)
-VALUES 
-  (001, 'oranges', 0),
-  (002, 'crackers', 1),
-  (003, 'seltzer water', 2);
-*/
-
-// START HERE: clearing works, but is not asynchronous
-//             saving the data is not working
+// save data on update from the client
 app.post('/storage', (req, res) => {
-  console.log(" => clearing table");
-  pool.query(clearTableText, (err, res) => {
-    console.log(' --> cleared table')
-    console.log(res); // showing as undefined
-    // res.status(201).send(' --> cleared table');
-  })
-
-  console.log(" => saving items", req.body)
-
-  queryText = `
-INSERT INTO items (id, item_name, item_number)
-VALUES`
-
+  
+  // create query from req.body
+  var queryText = queryPostTemplate;
   itemList = req.body;
   for (var i = 0; i < itemList.length; i++) {
     let item = itemList[i];
-    let itemString = `\n  (${item.id}, '${item.item_name}', ${item.item_number})`
+    let itemString = `\n  ('${item.id}', '${item.item_name}', ${item.item_number}),`
     queryText += itemString;
   }
-  queryText += ";";
-  console.log(queryText);
+  queryText = queryText.replace(/,$/,";");
 
-  // start query
-  // express.json();
-  // asyncHandler(async (req, res, next) => {
-  //   db.tx(async (client) => {
-  //     const items = await client.query(queryText, []);
-  //     console.log(res);
-  //     console.log(' --> queried list')
-  //   }, next);
-  // })
-  pool.query(queryText, {}, (err, res) => {
-    console.log(' --> queried list')
+  // send query to database
+  pool.query(queryText, (err, res) => {
     console.log(res);
-    // res.status(201).send(' --> Stored list in database');
+    // res.status(201).send(' --> cleared table');
   })
 })
 
